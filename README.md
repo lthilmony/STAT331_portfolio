@@ -1,10 +1,10 @@
-# Table of Contents 
+# Table of Contents
 
 ## Final Grade Reflection
 
 ## Essay Responses
 
-## Supporting Artifacts 
+## Supporting Artifacts
 
 ### Demonstration of Learning Targets
 
