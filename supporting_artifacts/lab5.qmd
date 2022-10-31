@@ -1,0 +1,234 @@
+---
+title: "Lab 5: Factors in Visualizations"
+author: "Luke Thilmony"
+format: html
+editor: visual
+---
+
+## Set-up
+
+```{r load_packages}
+#| message: false
+library(tidyverse)
+library(forcats)
+```
+
+## Ingest Species Data
+
+```{r ingest}
+#| message: false
+surveys <- read_csv(
+  here::here(
+    'Week 5',
+    'Lab',
+    'surveys.csv'
+  )
+)
+```
+
+## 1: Revisiting Lab 2
+
+### 1. & 2.
+
+```{r reordered_plotting}
+surveys <- surveys |> 
+  mutate(
+    species = fct_reorder(
+      species,
+      weight,
+      .fun = mean,
+      .desc = TRUE
+    )
+  )
+    
+surveys |> 
+  ggplot(
+    mapping = aes(
+      x = weight,
+      y = species
+    )
+  ) +
+    geom_jitter(color = 'tomato', alpha = 1/15) +
+    geom_boxplot() +
+# Question 2:
+  labs(
+    title = 'Species',
+    xlab = 'Weight'
+  ) +
+  theme(
+    axis.title.y = element_blank()
+  )
+```
+
+## 2: Time-Series Plot
+
+### 1.
+
+```{r ts_ugly}
+surveys_ts <- surveys |> 
+  group_by(
+    genus,
+    year
+  )
+  
+ggplot(
+  data = surveys_ts,
+  mapping = aes(
+    x = year,
+    y = weight,
+    color = genus
+  )
+) +
+geom_line() +
+labs(
+  x = 'Year',
+  y = 'Weight',
+  color = 'Genus'
+)
+```
+
+### 2.
+
+```{r timeseries_mean}
+surveys_ts_mean <- surveys_ts |> 
+  mutate(
+    avg_weight = mean(weight)
+  )
+
+ggplot(
+  data = surveys_ts_mean,
+  mapping = aes(
+    x = year,
+    y = avg_weight,
+    color = genus
+  )
+) +
+  geom_line() +
+  labs(
+    x = 'Year',
+    y = 'Average Weight',
+    color = 'Genus'
+  )
+```
+
+### 3.
+
+```{r reordered_ts}
+ggplot(
+  data = surveys_ts_mean,
+  mapping = aes(
+    x = year,
+    y = avg_weight,
+    color = fct_reorder(
+      genus,
+      weight,
+      .fun = mean,
+      .desc = T
+    )
+  )
+) +
+  geom_line() +
+  labs(
+    x = 'Year',
+    y = 'Average Weight',
+    color = 'Genus'
+  )
+```
+
+### 4.
+
+```{r retitle}
+ggplot(
+  data = surveys_ts_mean,
+  mapping = aes(
+    x = year,
+    y = avg_weight,
+    color = fct_reorder(
+      genus,
+      weight,
+      .fun = mean,
+      .desc = T
+    )
+  )
+) +
+  geom_line() +
+  labs(
+    x = 'Year',
+    title = 'Average Weight of Animals by Year',
+    color = 'Genus of Animal'
+  ) +
+  theme(
+    axis.title.y = element_blank()
+  )
+```
+
+## 3: Captures over the Week
+
+### 1.
+
+```{r rodents}
+rodents <- surveys |> 
+  filter(
+    taxa == 'Rodent',
+    day_of_week != 'NA'
+  )
+
+ggplot(
+  data = rodents,
+  mapping = aes(
+    x = day_of_week
+  )
+) +
+  geom_bar()
+```
+
+### 2.
+
+```{r}
+ggplot(
+  data = rodents,
+  mapping = aes(
+    y = fct_relevel(
+      day_of_week,
+      'Sat',
+      'Fri',
+      'Thu',
+      'Wed',
+      'Tue',
+      'Mon',
+      'Sun'
+    )
+  )
+) +
+  geom_bar() +
+  labs(
+    x = 'Number of Rodents',
+    title = 'Number of Rodents Captured, by Day of Week'
+  ) +
+  theme(
+    axis.title.y = element_blank()
+  )
+```
+
+### 3.
+
+```{r collapse}
+ggplot(
+  data = rodents,
+  mapping = aes(
+    y = fct_collapse(
+      day_of_week,
+      Weekend = c('Sun', 'Sat'),
+      Weekday = c('Mon', 'Tue', 'Wed', 'Thu', 'Fri')
+    )
+  )
+) +
+  geom_bar() +
+  labs(
+    x = 'Number of Rodents',
+    title = 'Number of Rodents Captured, Weekend vs. Weekday'
+  ) +
+  theme(
+    axis.title.y = element_blank()
+  )
+```

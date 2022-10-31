@@ -1,0 +1,103 @@
+---
+title: "Challenge 3"
+format: html
+editor: visual
+author: "Luke Thilmony"
+---
+
+## Setup
+
+```{r setup}
+#| message: false
+library(tidyverse)
+
+hiphop <- read_csv(here::here("supporting_artifacts", "hiphop.csv"))
+
+hiphop_clean <- hiphop |> 
+  drop_na(
+    word:popularityScore
+  )
+
+hiphop_clean <- hiphop_clean |> 
+  mutate(
+    whiteNonwhite = if_else(
+      ethnic == 'white',
+      'white',
+      'nonwhite'
+    )
+  )
+```
+
+## Published Comparisons
+
+```{r}
+artists <- hiphop_clean |> 
+  distinct(
+    subj,
+    .keep_all = TRUE
+  ) |> 
+  select(
+    sex,
+    whiteNonwhite,
+    intl:unclassifiable
+  )
+
+by_sex <- artists |> 
+  group_by(
+    sex
+  ) |> 
+  summarize(
+    across(
+      intl:unclassifiable,
+      .fns = mean
+    )
+  )
+
+by_sex_diff <- by_sex |> 
+  ungroup() |> 
+  mutate(
+    across(
+      intl:unclassifiable,
+      .fns = diff
+    ),
+    across(
+      intl:unclassifiable,
+      .fns = abs
+    )
+  )
+
+by_white <- artists |> 
+  group_by(
+    whiteNonwhite
+  ) |> 
+  summarize(
+    across(
+      intl:unclassifiable,
+      .fns = mean
+    )
+  )
+
+by_white_diff <- by_white |> 
+  ungroup() |> 
+  mutate(
+    across(
+      intl:unclassifiable,
+      .fns = diff
+    ),
+    across(
+      intl:unclassifiable,
+      .fns = abs
+    )
+  )
+
+by_sex_diff
+by_white_diff
+```
+
+a.  The genre with the largest difference in means between the two sexes was rock with a difference of 1.13.
+
+b.  The genre with the largest difference in means between white and nonwhite participants was the international genre with a difference of 1.59
+
+## Study Design Critiques
+
+One concern I have is the with the population that was sampled in this study. The group of people sampled is very specific (undergraduates in a select few majors at a particular school), so I have some concerns if these results are meaningfully generalizable. I am also concerned about a few of the survey questions. Regarding the popular culture questions, they seemed to just make these up without giving any basis or reasoning, so I'm unsure if these questions accurately reflect a participant's actual knowledge of popular culture.

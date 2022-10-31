@@ -1,0 +1,81 @@
+---
+title: "Practice 4: Tidy Data with tidyr"
+format: html
+editor: visual
+---
+
+## Setup
+
+```{r setup}
+library(tidyverse)
+library(readxl)
+```
+
+## Ingest
+
+```{r ingest}
+military_gdp <- read_xlsx(
+  here::here("supporting_artifacts", "gov_spending_per_capita.xlsx"),
+  sheet = "Share of Govt. spending",
+  skip = 7,
+  n_max = 191
+  )
+```
+
+## Cleaning
+
+```{r cleaning}
+military_clean <- military_gdp |> 
+  mutate(
+    across(everything(), ~na_if(., "xxx")),
+    across(everything(), ~na_if(., ". .")),
+    across("1988":"2019", ~as.numeric(.))
+  )
+```
+
+## Region Data
+
+```{r region}
+cont_region <- read_xlsx(
+  here::here("Week 4", "Practice", "gov_spending_per_capita.xlsx"),
+  sheet = "Regional totals",
+  skip = 14
+  ) |> 
+  filter(
+    Region != "World total (including Iraq)", 
+    Region != "World total (excluding Iraq)"
+  )
+```
+
+## Removing Regions
+
+```{r remove region}
+military_clean <- military_clean |> 
+  anti_join(
+    cont_region,
+    by = c("Country" = "Region")
+  )
+```
+
+Sub-Saharan, Asia & Oceania, Central America and the Caribbean, Middle East were all not removed.
+
+## Pivot
+
+```{r pivot}
+military_long <- military_clean |> 
+  pivot_longer(
+    cols = "1988":"2019",
+    names_to = "Year",
+    values_to = "Spending"
+  )
+```
+
+## Visualization
+
+```{r boxplots}
+ggplot(
+  military_long,
+  mapping = aes(y = Year, x = Spending)
+) +
+  geom_boxplot()
+```

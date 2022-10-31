@@ -1,0 +1,234 @@
+---
+title: "Lab 3: Hip-Hop Lyrics"
+format: html
+editor: visual
+author: "Luke Thilmony"
+---
+
+## Setup
+
+```{r setup}
+#| message: false
+library(tidyverse)
+```
+
+## Data Import
+
+```{r ingest}
+#| message: false
+hiphop <- read_csv(here::here("Week 3", "Lab", "hiphop.csv"))
+```
+
+## Dataset Summary
+
+##### 1. Overview
+
+This dataset is focused on the familiarity which participants have with certain African-American English terms, and how this familiarity is related to their music preferences. The dataset contains a category of specific AAE words which were tested. It also contains a number of self-reported demographic data categories, such as ethnicity, sex, age, and location, as well as information on the genres of music that the participant enjoys, such as hip-hop.
+
+There were 168 subjects in this study which were undergraduates enrolled in linguistics, sociology, and music classes at the University of Minnesota. Their familiarity was coded on a 5 point Likert scale from 1 (no familiarity) to 5 (good familiarity), as well as on a binary scale. Each subject was asked about 64 AAE words or phrases.
+
+##### 2. Rows
+
+The rows of this dataset are each a unique combonation of a word and test subject.
+
+##### 3. Missing Values
+
+The missing values were replaced with the mean values for the variable. The drawback of doing this is that it might not be representative of reality because the values are extrapolated. The benefit to doing this is that there are no longer any data points missing so it doesn't require any additional data cleaning
+
+##### 4. Cleaning
+
+```{r}
+hiphop_clean <- hiphop |> 
+  drop_na(
+    word:popularityScore
+  )
+```
+
+##### 5. Distinct AAE Words
+
+```{r}
+hiphop_clean |> 
+  distinct(
+    word
+  ) |> 
+  count()
+```
+
+There were 64 distinct AAE words studied.
+
+##### 6. White and Nonwhite
+
+```{r whiteNonwhite}
+hiphop_clean <- hiphop_clean |> 
+  mutate(
+    whiteNonwhite = if_else(
+      ethnic == 'white',
+      'white',
+      'nonwhite'
+    )
+  )
+```
+
+##### 7. Demographics Information
+
+```{r demographics}
+demographics <- hiphop_clean |> 
+  distinct(
+    subj,
+    .keep_all = TRUE
+  ) |>
+  mutate(
+    sex = as.factor(sex),
+    ethnic = as.factor(ethnic)
+  ) |> 
+  select(
+    sex,
+    age,
+    ethnic,
+  )
+summary(demographics)
+```
+
+There were `r count(demographics)` test subjects in this study. Of the 168 subjects, 117 were female and 51 were male. Regarding ethnicity, 135 subjects were white, 19 were Asian, 5 were African, 3 Hispanic, 2 Indian, 1 biracial, 1 black, 1 native, and 1 unknown. The mean age of the subjects was 20.02 and the median age was 19.
+
+##### 8. Demographic Plots
+
+```{r Boxplots}
+ggplot(
+  demographics,
+  mapping = aes(x = age, y = ethnic, fill = sex)
+) +
+  geom_boxplot() +
+  labs(
+    x = "Age",
+    y = "Ethnicity",
+    fill = "Sex",
+    title = "Distribution of Age by Ethnicity",
+    subtitle = "Subset by Sex"
+  )
+```
+
+```{r Density Plots}
+#| message: false
+ggplot(
+  demographics,
+  mapping = aes(x = age, y = sex)
+) +
+  ggridges::geom_density_ridges(scale = 0.9) +
+  labs(
+    x = "Age",
+    y = "Sex",
+    title = "Distribution of Age by Sex"
+  )
+```
+
+## Familiar Words
+
+```{r below 20}
+hiphop_clean |> 
+  filter(
+    age < 20
+  ) |> 
+  select(
+    word,
+    familiarity
+  ) |>
+  group_by(
+    word
+  ) |> 
+  mutate(
+    avg = mean(familiarity),
+  ) |> 
+  distinct(
+    word,
+    avg
+  ) |> 
+  summarize(
+    avg
+  ) |> 
+  filter(
+    avg == min(avg) | 
+      avg == max(avg)
+  )
+```
+
+For people under 20, the least familiar word was "catch the vapors" and the most familiar word was "off the hook."
+
+```{r nonwhite women}
+hiphop_clean |> 
+  filter(
+    toupper(whiteNonwhite) == "NONWHITE",
+    toupper(sex) == "FEMALE"
+  ) |> 
+  select(
+    word,
+    familiarity
+  ) |>
+  group_by(
+    word
+  ) |> 
+  mutate(
+    avg = mean(familiarity),
+  ) |> 
+  distinct(
+    word,
+    avg
+  ) |> 
+  summarize(
+    avg
+  ) |> 
+  filter(
+    avg == min(avg) | 
+      avg == max(avg)
+  )
+```
+
+For nonwhite women the most familiar word was "feel me" and the least familiar words were "break someone out," "dukey rope," "plex," and "rollie."
+
+```{r white men over 30}
+hiphop_clean |> 
+  filter(
+    age > 30,
+    toupper(whiteNonwhite) == "WHITE",
+    toupper(sex) == "MALE"
+  ) |> 
+  select(
+    word,
+    familiarity
+  ) |>
+  group_by(
+    word
+  ) |> 
+  mutate(
+    avg = mean(familiarity),
+  ) |> 
+  distinct(
+    word,
+    avg
+  ) |> 
+  summarize(
+    avg
+  ) |> 
+  filter(
+    avg == min(avg) | 
+      avg == max(avg)
+  )
+```
+
+For white men over 30, the most familiar word was "5-0" and there were 25 unfamiliar words, including "dollar cab," "dap," and others.
+
+## Study Subjects
+
+```{r}
+hiphop_clean |> 
+  filter(
+    age >= 17,
+    age <= 23,
+    toupper(sex) == "MALE",
+    bieber >= 3,
+    city <= 60000,
+    city >= 10000
+  )
+```
+
+I think Justin Bieber was probably subject p17. This subject fits the information given about Bieber; he comes from a somewhat small town, is between the ages of 17 and 23, is male, and named a fair amount of Justin Beiber songs.
