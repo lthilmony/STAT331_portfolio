@@ -19,8 +19,7 @@ library(forcats)
 #| message: false
 surveys <- read_csv(
   here::here(
-    'Week 5',
-    'Lab',
+    "supporting_artifacts",
     'surveys.csv'
   )
 )

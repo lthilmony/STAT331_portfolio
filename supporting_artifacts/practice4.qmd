@@ -37,7 +37,7 @@ military_clean <- military_gdp |>
 
 ```{r region}
 cont_region <- read_xlsx(
-  here::here("Week 4", "Practice", "gov_spending_per_capita.xlsx"),
+  here::here("supporting_artifacts", "gov_spending_per_capita.xlsx"),
   sheet = "Regional totals",
   skip = 14
   ) |> 

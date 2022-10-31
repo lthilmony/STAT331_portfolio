@@ -13,8 +13,7 @@ library(tidyverse)
 
 avocados <- read_csv(
   here::here(
-    "Week 4",
-    "Lab",
+    "supporting_artifacts",
     "avocado.csv"
   )
 )

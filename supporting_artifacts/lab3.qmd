@@ -16,7 +16,7 @@ library(tidyverse)
 
 ```{r ingest}
 #| message: false
-hiphop <- read_csv(here::here("Week 3", "Lab", "hiphop.csv"))
+hiphop <- read_csv(here::here("supporting_artifacts", "hiphop.csv"))
 ```
 
 ## Dataset Summary
