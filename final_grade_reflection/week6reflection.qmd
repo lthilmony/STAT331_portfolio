@@ -1,0 +1,30 @@
+---
+title: "Week 6 Reflection"
+author: "Luke Thilmony"
+format: pdf
+editor: visual
+---
+
+## Learning Targets
+
+In Practice Activity 4, I imported data from a .xlsx file (WD-1), I used a filtering join (WD-6), and filtered rows to clean the dataframe (WD-3). In Lab 4, I ingested data from a .csv file (WD-1), as well as use `mutate()`, `rename()`, and `data.frame()` to modify and create new variables (WD-4) which was needed to perform a mutating joins (WD-5) and filtering joins (WD-6). Also in Lab 4, I made a few different visualizations, like the boxplots in 5., the boxplots with color in 6. and the stacked bar graph in 7 (DVS-1)as well as select specific variables using `select()` (WD-2). In Challenge 3, I calculated the numerical summaries (in this case the difference in means) across multiple variables (DVS-4) and groups (DVS-5). Also, Challenge 3 demonstrates how I make well documented, tidy code (R-2), robust code R-3), and concise code (PE-1) that does not have superfluous repetition (PE-3). In Lab 5, I worked with factors (WD-4) to make a series of modifications on a few plots (DVS-2) to make the visualization easier to read. In Lab 3, I used boxplots sorted by ethnicity, as well as a density plot to illustrate how to shape of the distribution of ages varies between the sexes (DVS-1, DVS-3). Lab 3 illustrates how I use the `here()` package and am able to format a Quarto Document such that it looks organized and professional (R-1). Throughout the documents named above, I use modern functions and tools that are not depreciated in the tidyverse (PE-4).
+
+## Continued Learning
+
+I have demonstrated my commitment to continued learning by submitting revisions. In Challenge 2 it was recommended to me to play around with the dimensions of the density graph, so in Lab 3, I changed the density graph dimensions to limit the clipping between the two variables on the y-axis. Also in Lab 3, I revised question 1 to give more detail about the background of the study. I've also made quite a few revisions to Lab 4. I fixed the overall formatting of the report, and revised questions 3-6. For questions 3 and 4, I limited the output to just the maximum region or month in which the most sales occurred, instead of including every month or region and looking by eye to see which one had the maximum number of sales. For number 5, I replaced my `filter()` function with a `semi_join()`. For number 6, I coded in the difference between the California Regions instead of computing them by hand, and used a `pivot_wider()`. I've been particularly careful in regards to the formatting of the subsequent labs (Lab5) because of the feedback I got on Lab 4.
+
+## Team Growth
+
+My main aspect of team growth in the past three weeks has been communication outside of class. I have worked with my group outside of class more than I had in the first three weeks. I've found that I'm more willing to communicate about assignments that I or others in my group have had trouble with; reached out to them more about any practice activities we didn't finish in class, or to get pointers for Labs and Challenges. I feel like this is beneficial not only for myself but for my group as a whole because it opens up more opportunities for peer feedback, which should hopefully help improve out code even further.
+
+## Classroom Learning Community
+
+I've continued to interact with people in a respectful manner; in regards to offering feedback, I aim to do so kindly and as often as I can. I've offered answers to a question on Discord, and hope to help if possible and whenever I have the time.
+
+## Personal Goals
+
+I feel like I'm headed in the right direction of achieving my personal goals. Learning more customization techniques about ggplot in Lab 5 was a large step in improving my visualization goal. I've also improved my ability to collaborate, not only in class but out of class as well.
+
+## Grade Proposal
+
+I feel like my efforts and results would be consistent with an A-. I feel like I've outlined how I've achieved every single learning target we've covered so far, with the relevant artifacts. I've given the examples of when I've needed to do revisions, and I've also mentioned how these revisions can carry over between assignments. I've demonstrated effort in attempting the challenges; I have submitted a full attempt to all the challenges, with my Challenge 3 being an exemplar. I've stated above how I continue to grow as a group member, collaborating and communicating respectfully. I come to class every week prepared; I've at least read the section in the book that I need to, if not done the preview activities as well. Lastly, I try to give feedback to others where I can in a kind manner. I admit that I haven't done all my peer reviews (I keep forgetting because they don't show up on the dashboard), though I also give feedback to group members in a less formal format.
