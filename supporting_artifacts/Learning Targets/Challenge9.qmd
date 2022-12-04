@@ -1,0 +1,213 @@
+---
+title: "Challenge 9: Baby Names"
+format:
+  html:
+    self-contained: true
+editor: visual
+author: "Luke Thilmony"
+---
+
+## Setup
+
+```{r}
+#| message: false
+library(tidyverse)
+library(knitr)
+library(DT)
+```
+
+```{r}
+#| message: false
+names_a <- read_csv(here::here('supporting_artifacts', 'StateNames_A.csv'))
+```
+
+## Dataset Preview
+
+```{r}
+datatable(names_a, class = 'cell-border stripe')
+```
+
+## 3 Summarizing and Visualizing
+
+### 1.
+
+```{r}
+names_allison <- names_a |> 
+  filter(
+    Name == 'Allison'
+  ) |> 
+  group_by(
+    State,
+    Gender
+  ) |> 
+  summarize(sum = sum(Count)) |> 
+  pivot_wider(
+    names_from = Gender,
+    values_from = sum
+  ) |> 
+  mutate(
+    M = replace_na(M, 0)
+  ) |> 
+  rename(
+    "Number of Female Babies" = `F`,
+    "Number of Male Babies" = M
+  )
+
+kable(names_allison, 'pipe')
+datatable(names_allison, class = 'cell-border stripe')
+```
+
+### 2.
+
+```{r}
+names_allison <- names_allison |> 
+  select(
+    State,
+    `Number of Female Babies`
+  )
+```
+
+### 3.
+
+```{r}
+allison_years <- names_a |> 
+  filter(
+    Name == 'Allison'
+  ) |> 
+  group_by(
+    Year
+  ) |> 
+  summarize(
+    sum = sum(Count)
+  )
+
+allison_years |> ggplot(
+  mapping = aes(x = Year, y = sum)
+) + 
+  geom_line() +
+  labs(
+    y = element_blank(),
+    title = 'Frequency of Babies Named "Allison"'
+  )
+```
+
+## 4 Modeling the Number of Allisons
+
+### 4.
+
+```{r}
+allison_model <- allison_years |> 
+  lm(
+    sum ~ Year,
+    data = _
+  )
+```
+
+### 5.
+
+```{r}
+allison_model |> 
+  ggplot(
+    mapping = aes(x = Year, y = sum)
+  ) +
+  geom_point() +
+  stat_smooth(method = 'lm') +
+  labs(
+    y = 'Number of Babies Named Allison'
+  )
+```
+
+### 6.
+
+predicted count<sub>allison</sub> = 209815.1 - 101.6(Year)
+
+### 7.
+
+```{r}
+allison_model |> 
+  broom::augment() |> 
+  ggplot(
+    mapping = aes(y = .resid, x = .fitted)
+  ) +
+  geom_point() +
+  labs(
+    x = 'Predicted',
+    title = 'Residual Plot',
+    y = 'Residuals'
+  ) +
+  geom_hline(
+    yintercept = 0,
+    linetype = 'dashed'
+  )
+```
+
+There are no clear trends in the residual plot but there is a group of predicted counts from around 5900 to 6600 that were all underestimated.
+
+### 8.
+
+Your name is declining in coolness/popularity.
+
+## 5 Spelling by State
+
+### 1.
+
+```{r}
+names_allan <- names_a |> 
+  filter(
+    Name == 'Allan' | Name == 'Alan' | Name == 'Allen'
+  )
+```
+
+### 2.
+
+```{r}
+names_allan <- names_allan |> 
+  filter(
+    State == 'CA' | State == 'PA',
+    Year == '2000'
+  ) |> 
+  group_by(
+    State,
+    Name
+  ) |> 
+  summarize(
+    sum = sum(Count)
+  ) |> 
+  pivot_wider(
+    names_from = Name,
+    values_from = sum
+  ) |> 
+  rename(
+    'Frequency of "Alan"' = Alan,
+    'Frequency of "Allan"' = Allan,
+    'Frequency of "Allen"' = Allen
+  )
+
+kable(names_allan, 'pipe')
+```
+
+### 3.
+
+```{r}
+names_allan_pct <- names_allan |> 
+  mutate(
+    total = sum(
+      `Frequency of "Alan"`, 
+      `Frequency of "Allan"`, 
+      `Frequency of "Allen"`
+    ),
+    `Percent "Alan"` = (`Frequency of "Alan"` / total) * 100,
+    `Percent "Allan"` = (`Frequency of "Allan"` / total) * 100,
+    `Percent "Allen"` = (`Frequency of "Allen"` / total) * 100
+  ) |> 
+  select(
+    -total,
+    -`Frequency of "Alan"`,
+    -`Frequency of "Allan"`,
+    -`Frequency of "Allen"`
+  )
+
+kable(names_allan_pct, 'pipe')
+```
+
+In CA, 65.54% were named Alan, 14.7% were named Allan, and 19.75% were named Allen. In PA, 42.86% were named Alan, 10.08% were named Allan, and 47.06% were named Allen.

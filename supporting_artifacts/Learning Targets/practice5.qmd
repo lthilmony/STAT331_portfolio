@@ -1,0 +1,54 @@
+---
+title: "Practice Activity 5: Dates and Times"
+format:
+  html:
+    self-contained: true
+editor: visual
+author: "Luke Thilmony"
+---
+
+## Setup
+
+```{r setup}
+#| message: false
+library(tidyverse)
+library(lubridate)
+
+sus_times <- read_csv(here::here(
+  "supporting_artifacts", "suspect_times.csv"
+))
+```
+
+## Exercises
+
+```{r}
+thanks <- ymd("2018-11-22", tz = "America/Los_Angeles")
+
+thanks_interval <- interval(
+  start = thanks - days(35),
+  end = thanks + days(35)
+)
+
+riddle_start <- ymd_hms("1970-01-01 00:00:00", tz = "America/Los_Angeles")
+
+
+sus_times <- sus_times |> 
+  force_tz(
+    tz = "America/Los_Angeles"
+  ) |> 
+  mutate(
+    riddle_start,
+    iceland = with_tz(Time.Spotted, tzone = "Atlantic/Reykjavik"),
+    totaltime = interval(riddle_start, Time.Spotted)
+  ) |> 
+  filter(
+    am(Time.Spotted) == FALSE,
+    wday(Time.Spotted) != 3,
+    wday(Time.Spotted) != 5,
+    Time.Spotted %within% thanks_interval == TRUE,
+    pm(iceland) == TRUE,
+    day(Time.Spotted) < 24,
+    day(Time.Spotted) >= 22,
+    as.numeric(totaltime) %% 10 == 0
+  )
+```
