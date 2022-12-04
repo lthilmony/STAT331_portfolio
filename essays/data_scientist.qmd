@@ -1,5 +1,12 @@
 ---
 title: "My Growth as a Data Scientist"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
+author: "Luke Thilmony"
 ---
+
+A main area of growth for me as a data scientist has been combining well written R code with quarto formatting to form a cohesive report on a particular task or goal. For example throughout Lab 7, I combined various R skills, like data ingest, cleaning, and manipulation with quarto formatting that eventually led to a comparison of graphs at the end and the implementation of a user made function to rescale a column of values in a data frame. The side by side graphs produced by R and formatted into a cohesive html document at the end allow the reader to more easily understand and interpret the data output by R, which may lead to more possibilities for statistical analysis.
+
+Another main area of growth for me has been in working as a team. The practice activities have given me some experience of what it's like to code with others to accomplish the same task. Gathering their input on my code and giving help when needed has given me a taste of what it might be like to work with others in a data science setting.

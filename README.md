@@ -4,6 +4,12 @@
 
 ## Essay Responses
 
+My Growth as a Data Scientist
+
+The Power of Efficiency
+
+Lightning Round
+
 ## Supporting Artifacts
 
 ### Demonstration of Learning Targets

@@ -1,0 +1,18 @@
+---
+title: "Lightning Round Essays"
+format:
+  html:
+    self-contained: true
+editor: visual
+author: "Luke Thilmony"
+---
+
+If Allen doesn't earn an A, then nobody should. Because he's in my group, I've seen the work that he puts into the class. He is a good group member and has a good idea of what needs to be done to complete the assignments, and as far as I know, has completed all the assignments. From working with him on various assignments, it's clear that he has a good grasp on the main ideas that we've covered in the class.
+
+The most difficult part of this class was working with strings and factors. This isn't a conceptual problem necessarily, as in I know what needs to be done, but more of a syntactical problem in that I don't know how to do particular tasks of the top of my head. Regular expressions is particularly hard to remember partly because we didn't use it a whole lot and partly because of the nauseating syntax. I would find myself always having to reference the documentation for problems regarding that particular area.
+
+The easiest part of the class for me was the graphing. Besides re-factoring/reordering the variables that needed to be, I found using ggplot to be very straightforward. I could put together a plot in ggplot, without having to reference any documentation, fairly quickly, which was helpful for many of the labs. This was also helpful because it allowed me to focus on things other than syntax, such as customization and graph choice.
+
+The part of the class that was the most interesting to me was working with the linear models in R. I had already done linear regression in STAT 302, but in that class we only used JMP, so it was interesting to see how to use R to accomplish some of the same goals.
+
+I would say to a student beginning the quarter in 331, to not be afraid to take risks on the challenges. I maybe didn't take as many risks on the challenges as I wanted to because of time constraints or lack of interest, but the class allows for risks to be taken, so take advantage of that. Because the challenges are more open ended, a lot of what you get out of them is what you put in, so don't be afraid to try new things in them.

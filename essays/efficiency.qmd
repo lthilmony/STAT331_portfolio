@@ -1,5 +1,12 @@
 ---
 title: "The Power of Efficiency"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
+author: "Luke Thilmony"
 ---
+
+To me, efficiency means being able to complete the task without wasting time or effort. This means two things with regard to statistical computing. This includes reducing the time it takes to write the code and also the time it takes for the code itself to run; so, efficiency in a statistics or data science setting might mean somebody writing some R code to complete a task in a reasonable but brief time frame, with the code itself having a low runtime. Efficiency is important because it enables us to spend and waste less time on a task; being efficient in the coding process can also enable us to tackle more problems more quickly, leaving us more time to do other tasks or to have more time to ourselves. In the context of a work environment, employers will value efficiency because for them, time is literally money. They will value a programmer or a program that can get a task done in a shorter time frame because that helps them get more value for their money.
+
+Lab 7 was a lab that I felt focused a bit on efficiency. In Part Two, Task 4, I found it was much more efficient for me to save the first part of the ggplot code as a list and add the " + geom_boxplot()" or " + geom_histogram()" to the list object because I was making two different types of graphs based on the same basic data. This allowed me to write the quite long ggplot() code only once without having to copy and paste, but still make two graphs.

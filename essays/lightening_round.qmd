@@ -1,5 +1,0 @@
----
-title: "Lightening Round Essays"
-format: html
-editor: visual
----

@@ -1,0 +1,174 @@
+---
+title: "Lab 7: Functions and Fish"
+format:
+  html:
+    self-contained: true
+editor: visual
+author: "Luke Thilmony"
+---
+
+## The Data
+
+```{r}
+#| message: false
+
+library(tidyverse)
+```
+
+```{r ingest}
+#| message: false
+
+fish <- read_csv(here::here("supporting_artifacts", "BlackfootFish.csv"))
+```
+
+## Part One: Summaries and Plots
+
+### Task 1 -- Summarizing Missing Data
+
+```{r}
+obs_na <- fish |> 
+  summarize(
+    across(
+      .cols = everything(),
+      .fns = ~ sum(is.na(.))
+    )
+  )
+  
+obs_na
+```
+
+There are 1796 observations with missing data. The variable with all of the missing data points is weight.
+
+### Task 3 -- Visualizing Missing Data
+
+```{r}
+#| fig-align: 'center'
+fish_plots <- fish |> 
+  group_by(
+    year, 
+    trip, 
+    section
+  ) |> 
+  summarize(
+    across(
+      .cols = everything(),
+      .fns = ~ sum(is.na(.))
+    )
+  ) |> 
+  select(
+    year,
+    trip,
+    section,
+    weight
+  ) |> 
+  mutate(
+    trip = as.factor(trip)
+  )
+
+fish_plots |> ggplot(
+    mapping = aes(
+      x = year, y = weight, fill = section
+    )
+  ) + 
+  geom_col() +
+  facet_grid(~ fct_recode(trip, `Trip 1` = '1', `Trip 2` = '2')) +
+  labs(
+    title = 'Frequency of Mission Data Over Time by Section',
+    subtitle = 'Faceted by Trip',
+    x = 'Year',
+    y = element_blank(),
+    fill = 'Section'
+  )
+```
+
+## Part Two: Adjusting the Data
+
+### Task 1 & 2-- Writing a Function, Adding Stops
+
+```{r}
+rescale01 <- function(vec) {
+  stopifnot(
+    is.numeric(vec),
+    length(vec) != 1
+  )
+  
+  vec_min <- min(vec, na.rm = T)
+  vec_max <- max(vec, na.rm = T)
+  
+  
+  res <- (vec - vec_min) / (vec_max - vec_min)
+  return(res)
+}
+```
+
+### Task 3 -- Simple Test
+
+```{r}
+x <- c(1:25, NA)
+rescale01(x)
+max(rescale01(x), na.rm = T)
+min(rescale01(x), na.rm = T)
+```
+
+### Task 4 -- Performing a More Difficult Test
+
+```{r}
+#| message: false
+#| layout-ncol: 2
+norescale <- ggplot(
+  data = fish,
+  mapping = aes(x = length)
+)
+
+norescale +
+  geom_boxplot() +
+  labs(
+    title = 'No Length Rescaling'
+  )
+norescale +
+  geom_histogram() +
+  labs(
+    title = 'No Length Rescaling'
+  )
+
+rescale <- ggplot(
+  data = fish,
+  mapping = aes(x = rescale01(length))
+) 
+rescale +
+  geom_boxplot()+
+  labs(
+    title = 'Rescaled Length'
+  )
+rescale +
+  geom_histogram() +
+  labs(
+    title = 'Rescaled Length'
+  )
+
+```
+
+### Task 5 -- Incorporating Variables
+
+```{r}
+rescale_columns <- function(df, var) {
+  stopifnot(is.data.frame(df))
+  
+  res <- df |> 
+    mutate(
+      across(
+        .col = {{var}},
+        .fns = rescale01
+      )
+    )
+  
+  return(res)
+}
+```
+
+### Task 6 -- Another Function Test
+
+```{r}
+res <- rescale_columns(fish, c(length, weight))
+res
+```
