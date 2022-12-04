@@ -1,6 +1,8 @@
 ---
 title: "Lab 4: Avocado Prices"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
 author: "Luke Thilmony"
 ---

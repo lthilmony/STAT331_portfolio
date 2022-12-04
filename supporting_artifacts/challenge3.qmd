@@ -1,6 +1,8 @@
 ---
 title: "Challenge 3"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
 author: "Luke Thilmony"
 ---

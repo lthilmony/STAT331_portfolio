@@ -1,7 +1,9 @@
 ---
 title: "Lab 5: Factors in Visualizations"
 author: "Luke Thilmony"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
 ---
 

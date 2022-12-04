@@ -1,6 +1,8 @@
 ---
 title: "Practice 4: Tidy Data with tidyr"
-format: html
+format:
+  html:
+    self-contained: true
 editor: visual
 ---
 
