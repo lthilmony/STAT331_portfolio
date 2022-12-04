@@ -36,7 +36,9 @@ Challenge 9
 
 ### Demonstration of Continued Learning
 
-#### Revising My Thinking
+Challenge 3
+
+### Demonstration of Revising My Thinking
 
 Lab 3
 
@@ -44,10 +46,6 @@ Lab 4
 
 Lab 4 Reflection
 
-#### Extending My Thinking
-
-Challenge 3
-
-### Growth as a Team Member
+### Demonstration of Peer Support
 
 Helping Classmate (Discord)
