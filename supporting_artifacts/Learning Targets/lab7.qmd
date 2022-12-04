@@ -18,7 +18,7 @@ library(tidyverse)
 ```{r ingest}
 #| message: false
 
-fish <- read_csv(here::here("supporting_artifacts", "BlackfootFish.csv"))
+fish <- read_csv(here::here("supporting_artifacts", 'Learning Targets', "BlackfootFish.csv"))
 ```
 
 ## Part One: Summaries and Plots

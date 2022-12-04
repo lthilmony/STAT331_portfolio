@@ -9,6 +9,7 @@ editor: visual
 ## Setup
 
 ```{r setup}
+#| message: false
 library(tidyverse)
 library(readxl)
 ```
@@ -16,8 +17,9 @@ library(readxl)
 ## Ingest
 
 ```{r ingest}
+#| message: false
 military_gdp <- read_xlsx(
-  here::here("supporting_artifacts", "gov_spending_per_capita.xlsx"),
+  here::here("supporting_artifacts", 'Learning Targets', "gov_spending_per_capita.xlsx"),
   sheet = "Share of Govt. spending",
   skip = 7,
   n_max = 191
@@ -39,7 +41,7 @@ military_clean <- military_gdp |>
 
 ```{r region}
 cont_region <- read_xlsx(
-  here::here("supporting_artifacts", "gov_spending_per_capita.xlsx"),
+  here::here("supporting_artifacts", 'Learning Targets', "gov_spending_per_capita.xlsx"),
   sheet = "Regional totals",
   skip = 14
   ) |> 

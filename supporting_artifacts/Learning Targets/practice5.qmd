@@ -15,7 +15,7 @@ library(tidyverse)
 library(lubridate)
 
 sus_times <- read_csv(here::here(
-  "supporting_artifacts", "suspect_times.csv"
+  "supporting_artifacts", 'Learning Targets', "suspect_times.csv"
 ))
 ```
 

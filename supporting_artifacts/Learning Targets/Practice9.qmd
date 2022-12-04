@@ -21,6 +21,7 @@ library(broom)
 #| message: false
 animal <- read_csv(here::here(
   'supporting_artifacts',
+  'Learning Targets',
   'mystery_animal.csv'
 ))
 ```

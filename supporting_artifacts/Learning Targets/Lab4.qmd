@@ -16,6 +16,7 @@ library(tidyverse)
 avocados <- read_csv(
   here::here(
     "supporting_artifacts",
+    'Learning Targets',
     "avocado.csv"
   )
 )

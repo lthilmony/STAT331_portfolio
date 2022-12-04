@@ -13,7 +13,7 @@ author: "Luke Thilmony"
 #| message: false
 library(tidyverse)
 
-hiphop <- read_csv(here::here("supporting_artifacts", "hiphop.csv"))
+hiphop <- read_csv(here::here("supporting_artifacts", 'Learning Targets', "hiphop.csv"))
 
 hiphop_clean <- hiphop |> 
   drop_na(

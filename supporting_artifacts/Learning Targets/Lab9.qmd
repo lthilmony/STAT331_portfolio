@@ -16,7 +16,7 @@ library(tidyverse)
 
 ```{r}
 #| message: false
-names_a <- read_csv(here::here('supporting_artifacts', 'StateNames_A.csv'))
+names_a <- read_csv(here::here('supporting_artifacts', 'Learning Targets', 'StateNames_A.csv'))
 ```
 
 ## 3 Summarizing and Visualizing
