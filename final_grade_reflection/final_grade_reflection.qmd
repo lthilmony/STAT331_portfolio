@@ -5,6 +5,82 @@ format: pdf
 editor: visual
 ---
 
-In this document, you make a data-based argument for the grade you've earned in this course. Your argument should include evidence from the supporting artifacts you've provided.
+I think I have earned an A in this class. I feel I have met all learning targets, consistently revised and extended my thinking throughout the quarter, worked as a good group member, and been been a good peer in terms of taking and giving criticisms.
 
-## The output document should be a PDF or a Word Document, as it should be a **maximum** of 2-pages.
+**Lab 3:**
+
+-   #7: PE-3
+
+-   #8: DVS-3
+
+**Challenge 3:**
+
+-   "Published Comparisons": DVS-4, DVS-5
+
+**Practice Activity 4:**
+
+-   "Ingest": WD-1
+
+-   "Region Data": WD-3
+
+-   "Removing Regions": WD-6, PE-4
+
+-   "Cleaning": PE-4
+
+**Lab 4:**
+
+-   Whole Lab: R-1
+
+-   "Setup": WD-1, R-1
+
+-   #2: WD-4, WD-5, WD-2
+
+-   #4: WD-6
+
+-   #5, #6: DVS-1
+
+-   #3: WD-2
+
+-   #6: WD-7
+
+-   #7: WD-7
+
+**Practice Activity 5:**
+
+-   "Exercises": WD-4
+
+-   Whole Lab: DVS-2, DVS-3
+
+**Lab 5:**
+
+-   #3: WD-4
+
+**Lab 7:**
+
+-   Part 2, Task 4: PE-1, PE-3, R-2, R-3
+
+-   Part 2, Task 1 & 2: PE-2
+
+-   Part 2, Task 5: PE-2
+
+**Practice Activity 9:**
+
+-   9.1 Part 2: DMS-2
+
+-   9.2 (Simulation): DSM-1
+
+**Lab 9:**
+
+-   Part 4: DSM-2
+
+**Challenge 9:**
+
+-   Part 3: DVS-6, DVS-7
+
+-   Part 5, #2 and #3: DVS-6, DVS-7
+
+I have committed to continued learning by completing revisions when needed and implementing those changes going forward. In Challenge 2 it was recommended to me to play around with the dimensions of the density graph, so in Lab 3, I changed the density graph dimensions to limit the clipping between the two variables on the y-axis. I've also made quite a few revisions to Lab 4. I fixed the overall formatting of the report, and revised questions 3-6. For questions 3 and 4, I limited the output to just the maximum region or month in which the most sales occurred, instead of including every month or region and looking by eye to see which one had the maximum number of sales. For number 5, I replaced my `filter()` function with a `semi_join()`. For number 6, I coded in the difference between the California Regions instead of computing them by hand, and used a `pivot_wider()`. I've been particularly careful in regards to the formatting of the subsequent labs (Lab5) because of the feedback I got on Lab 4.
+
+I have extended my thinking throughout the quarter by turning in every challenge. My Challenge 3, which was picked as an exemplar, I did the best I could with the tools that I had at the time to find the difference of multiple variables across two groups; this meant using `diff()` function in the across function. I also felt like I put in a little extra work thinking of meaningful critiques of the study. I looked through the methodology of the study directly from the text to get a better idea of why the researchers did some of the things they did. Because of these things, I feel like Challenge 3 is a god example of my extended thinking.
+
+I feel like I've contributed well as a team member and as a classmate throughout the quarter. While I find it much harder to engage online, I have occasionally offered advice to other students through discord. I will admit that while I have done a peer review of another classmates code, this aspect of participation has lacked a bit. However, I feel like I have been a good teammate. I show up to class every day and participate in the practice activities, prepared to learn and contribute if necessary. I have occasionally worked with group members outside of normal class times to collaborate on things that we have had problems with, and communicate with them outside of class as well, offering help if needed.
